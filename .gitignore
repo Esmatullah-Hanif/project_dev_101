@@ -1,0 +1,114 @@
+# =========================
+# Go / Gin
+# =========================
+
+# Go build outputs
+bin/
+dist/
+build/
+out/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Go coverage
+coverage/
+coverage.out
+coverage.html
+*.coverprofile
+
+# Go workspace local files
+go.work.sum
+
+# Air live reload
+tmp/
+.tmp/
+.temp/
+.air.toml
+
+# =========================
+# Microservices build outputs
+# =========================
+
+services/*/bin/
+services/*/dist/
+services/*/build/
+
+# =========================
+# Environment files
+# =========================
+
+.env
+.env.*
+!.env.example
+
+# =========================
+# Logs
+# =========================
+
+logs/
+*.log
+
+# =========================
+# Database / local data
+# =========================
+
+*.db
+*.sqlite
+*.sqlite3
+data/
+postgres-data/
+pgdata/
+
+# =========================
+# Docker local overrides
+# =========================
+
+docker-compose.override.yml
+
+# =========================
+# IDEs and editors
+# =========================
+
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+*.swp
+*.swo
+*.sublime-workspace
+
+# =========================
+# OS files
+# =========================
+
+.DS_Store
+Thumbs.db
+
+# =========================
+# Temporary files
+# =========================
+
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# =========================
+# Dependency/vendor behavior
+# =========================
+
+vendor/
+
+# =========================
+# Swagger generated docs
+# =========================
+# Uncomment if you do not want generated Swagger files committed.
+# docs/
