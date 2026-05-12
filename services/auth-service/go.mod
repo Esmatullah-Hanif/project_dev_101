@@ -8,6 +8,8 @@ require (
 	github.com/golang-jwt/jwt/v5 v5.0.0
 	github.com/google/uuid v1.5.0
 	github.com/jackc/pgx/v5 v5.5.0
+	github.com/swaggo/gin-swagger v1.6.0
+	github.com/swaggo/swag v1.16.1
 	golang.org/x/crypto v0.17.0
 )
 

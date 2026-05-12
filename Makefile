@@ -15,6 +15,9 @@ help:
 	@echo "  make lint               - Run linter"
 	@echo "  make clean              - Clean build artifacts"
 	@echo "  make migrate-up         - Run database migrations"
+	@echo "  make swagger            - Generate Swagger documentation for all services"
+	@echo "  make swagger-auth       - Generate Swagger docs for auth service"
+	@echo "  make swagger-user       - Generate Swagger docs for user service"
 	@echo "  make docker-up          - Start services with docker-compose"
 	@echo "  make docker-down        - Stop docker-compose services"
 
@@ -67,3 +70,30 @@ docker-down:
 
 docker-logs:
 	docker-compose logs -f
+
+swagger:
+	@echo "Generating Swagger documentation..."
+	@command -v swag >/dev/null 2>&1 || { echo "swag not found. Install with: go install github.com/swaggo/swag/cmd/swag@latest"; exit 1; }
+	@echo "Generating Auth Service docs..."
+	@cd services/auth-service && swag init -g cmd/main.go -o ../../services/auth-service/docs
+	@echo "Generating User Service docs..."
+	@cd services/user-service && swag init -g cmd/main.go -o ../../services/user-service/docs
+	@echo "Swagger docs generated successfully!"
+	@echo ""
+	@echo "Access Swagger UI at:"
+	@echo "  Auth Service:  http://localhost:8001/swagger/index.html"
+	@echo "  User Service:  http://localhost:8002/swagger/index.html"
+
+swagger-auth:
+	@echo "Generating Auth Service Swagger docs..."
+	@command -v swag >/dev/null 2>&1 || { echo "swag not found. Install with: go install github.com/swaggo/swag/cmd/swag@latest"; exit 1; }
+	@cd services/auth-service && swag init -g cmd/main.go -o ../../services/auth-service/docs
+	@echo "Auth Service Swagger docs generated!"
+	@echo "Access at: http://localhost:8001/swagger/index.html"
+
+swagger-user:
+	@echo "Generating User Service Swagger docs..."
+	@command -v swag >/dev/null 2>&1 || { echo "swag not found. Install with: go install github.com/swaggo/swag/cmd/swag@latest"; exit 1; }
+	@cd services/user-service && swag init -g cmd/main.go -o ../../services/user-service/docs
+	@echo "User Service Swagger docs generated!"
+	@echo "Access at: http://localhost:8002/swagger/index.html"

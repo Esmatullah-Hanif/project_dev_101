@@ -6,6 +6,8 @@ require (
 	github.com/example/microservices/shared v0.0.0
 	github.com/gin-gonic/gin v1.9.1
 	github.com/jackc/pgx/v5 v5.5.0
+	github.com/swaggo/gin-swagger v1.6.0
+	github.com/swaggo/swag v1.16.1
 )
 
 require (

@@ -103,7 +103,29 @@ make run-gateway
 # Output: API Gateway starting on port 8000
 ```
 
-### 5. Verify Setup
+### 5. Generate Swagger Documentation (Optional)
+
+For interactive API documentation, install the swag tool and generate docs:
+
+```bash
+# Install swag CLI tool
+go install github.com/swaggo/swag/cmd/swag@latest
+
+# Generate Swagger documentation for all services
+make swagger
+
+# Or generate for specific services
+make swagger-auth   # Auth service only
+make swagger-user   # User service only
+```
+
+Then access the Swagger UI:
+- Auth Service: http://localhost:8001/swagger/index.html
+- User Service: http://localhost:8002/swagger/index.html
+
+See [docs/SWAGGER.md](SWAGGER.md) for complete Swagger documentation.
+
+### 6. Verify Setup
 
 Test health endpoint:
 ```bash

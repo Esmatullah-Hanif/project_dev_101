@@ -15,6 +15,26 @@ import (
 	"github.com/example/microservices/shared/pkg/logger"
 )
 
+// @title Auth Service API
+// @version 1.0
+// @description Authentication and token management service for the microservices architecture
+// @termsOfService http://swagger.io/terms/
+
+// @contact.name API Support
+// @contact.url http://www.swagger.io/support
+
+// @license.name MIT
+// @license.url https://opensource.org/licenses/MIT
+
+// @host localhost:8001
+// @BasePath /
+// @schemes http https
+
+// @securityDefinitions.apikey BearerAuth
+// @in header
+// @name Authorization
+// @description "Type 'Bearer TOKEN' to correctly set the API Key"
+
 func main() {
 	cfg, err := config.Load()
 	if err != nil {

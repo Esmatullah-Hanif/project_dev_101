@@ -27,3 +27,7 @@ type AuthResponse struct {
 	ExpiresIn    int    `json:"expires_in"`
 	User         User   `json:"user"`
 }
+
+type RefreshTokenRequest struct {
+	RefreshToken string `json:"refresh_token" binding:"required"`
+}

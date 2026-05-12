@@ -175,6 +175,25 @@ Expected response:
 }
 ```
 
+### API Documentation with Swagger
+
+Each service includes interactive Swagger/OpenAPI documentation:
+
+**Generate documentation** (requires `swag` CLI):
+```bash
+# Install swag tool
+go install github.com/swaggo/swag/cmd/swag@latest
+
+# Generate docs for all services
+make swagger
+```
+
+**Access the documentation:**
+- Auth Service: http://localhost:8001/swagger/index.html
+- User Service: http://localhost:8002/swagger/index.html
+
+For detailed Swagger setup and usage, see [docs/SWAGGER.md](docs/SWAGGER.md).
+
 ## API Endpoints
 
 ### Authentication
@@ -380,6 +399,11 @@ make test
 
 # Lint code
 make lint
+
+# Generate Swagger API documentation
+make swagger
+make swagger-auth  # Auth service only
+make swagger-user  # User service only
 
 # Clean build artifacts
 make clean
