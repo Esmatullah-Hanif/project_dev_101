@@ -1,0 +1,291 @@
+Go Gin Microservices Boilerplate - Complete Project Structure
+================================================================
+
+Root Level Files:
+├── README.md                          # Main documentation with overview
+├── IMPLEMENTATION_GUIDE.md            # Detailed implementation guide
+├── PROJECT_STRUCTURE.txt             # This file
+├── go.mod                            # Go module definition
+├── Makefile                          # Build and development targets
+├── docker-compose.yml                # Container orchestration
+├── .env                              # Environment variables (generated from .env.example)
+├── .env.example                      # Environment template
+├── .gitignore                        # Git ignore rules
+└── .golangci.yml                     # Linter configuration
+
+Directories:
+===========
+
+shared/                              # Shared libraries across services
+├── go.mod
+└── pkg/
+    ├── logger/
+    │   └── logger.go                # Structured logging (zerolog)
+    ├── config/
+    │   └── config.go                # Configuration from environment
+    ├── database/
+    │   └── database.go              # PostgreSQL connection pooling
+    ├── response/
+    │   └── response.go              # HTTP response helpers
+    ├── errors/
+    │   └── errors.go                # Custom error types
+    ├── validator/
+    │   └── validator.go             # Input validation helpers
+    └── middleware/
+        └── middleware.go            # Reusable Gin middleware
+
+services/                            # Microservices
+
+  api-gateway/                       # API Gateway Service (Port 8000)
+  ├── cmd/
+  │   └── main.go                    # Service entrypoint
+  ├── go.mod                         # Service module definition
+  ├── Dockerfile                     # Container image definition
+  └── internal/
+      ├── handler/
+      │   └── health_handler.go      # Health check handler
+      ├── router/
+      │   └── routes.go              # Route registration
+      └── proxy/
+          └── proxy.go               # HTTP request proxying
+
+  auth-service/                      # Authentication Service (Port 8001)
+  ├── cmd/
+  │   └── main.go                    # Service entrypoint
+  ├── go.mod                         # Service module definition
+  ├── Dockerfile                     # Container image definition
+  └── internal/
+      ├── handler/
+      │   └── auth_handler.go        # Sign up, sign in, refresh handlers
+      ├── service/
+      │   └── auth_service.go        # Business logic (JWT, password hashing)
+      ├── repository/
+      │   └── user_repository.go     # Database queries
+      ├── router/
+      │   └── routes.go              # Route registration
+      └── model/
+          └── user.go                # Domain models and DTOs
+
+  user-service/                      # User Management Service (Port 8002)
+  ├── cmd/
+  │   └── main.go                    # Service entrypoint
+  ├── go.mod                         # Service module definition
+  ├── Dockerfile                     # Container image definition
+  └── internal/
+      ├── handler/
+      │   └── user_handler.go        # Get, list, update, delete handlers
+      ├── service/
+      │   └── user_service.go        # Business logic
+      ├── repository/
+      │   └── user_repository.go     # Database queries
+      ├── router/
+      │   └── routes.go              # Route registration
+      └── model/
+          └── user.go                # Domain models and DTOs
+
+migrations/                          # Database migrations
+├── 001_create_users_table.sql      # Initial schema (users table, indexes)
+
+docs/                               # Documentation
+├── ARCHITECTURE.md                 # System design and architecture
+├── DATABASE.md                     # Database guide and schema
+└── SETUP.md                        # Setup and running instructions
+
+examples/                           # Example scripts
+├── auth_requests.sh               # Auth API testing examples
+└── user_requests.sh               # User API testing examples
+
+
+File Statistics:
+================
+
+Go Source Files (27):
+- Shared Libraries: 7 files
+- Auth Service: 5 files
+- User Service: 5 files
+- API Gateway: 3 files
+- Service Entrypoints: 3 files
+- Go Modules: 4 files
+
+Configuration Files (5):
+- .env (generated)
+- .env.example
+- .gitignore
+- .golangci.yml
+- docker-compose.yml
+
+Documentation Files (5):
+- README.md
+- IMPLEMENTATION_GUIDE.md
+- docs/ARCHITECTURE.md
+- docs/DATABASE.md
+- docs/SETUP.md
+
+Database Files (1):
+- migrations/001_create_users_table.sql
+
+Example Files (2):
+- examples/auth_requests.sh
+- examples/user_requests.sh
+
+Build Files (1):
+- Makefile
+
+Container Files (3):
+- services/api-gateway/Dockerfile
+- services/auth-service/Dockerfile
+- services/user-service/Dockerfile
+
+
+Key Features:
+=============
+
+✓ Clean Layered Architecture
+  - Handler Layer (HTTP)
+  - Service Layer (Business Logic)
+  - Repository Layer (Data Access)
+  - Model Layer (Domain Objects)
+
+✓ Shared Libraries
+  - Logger (structured logging)
+  - Config (environment-driven)
+  - Database (connection pooling)
+  - Middleware (CORS, auth, logging, etc.)
+  - Response helpers (consistent JSON)
+  - Error handling (custom types)
+  - Validation (input checking)
+
+✓ Authentication
+  - JWT token generation
+  - Token refresh mechanism
+  - Bcrypt password hashing
+  - Auth middleware for protected routes
+
+✓ API Gateway
+  - Single entry point
+  - Request routing to services
+  - Header forwarding
+  - Health check endpoint
+
+✓ Database
+  - PostgreSQL with Supabase support
+  - Connection pooling
+  - Soft deletes
+  - Proper indexing
+  - Parameterized queries
+
+✓ Deployment
+  - Docker containers for each service
+  - Docker Compose for local development
+  - Multi-stage builds for small images
+  - Health checks
+
+✓ Documentation
+  - Complete README
+  - Architecture guide
+  - Database guide
+  - Setup instructions
+  - Example scripts
+
+✓ Developer Experience
+  - Makefile with common tasks
+  - .env configuration
+  - Makefile targets for building/running
+  - Example API requests
+  - Clear error messages
+
+
+Technologies Used:
+==================
+
+Core:
+- Go 1.21+
+- Gin Web Framework
+- PostgreSQL / Supabase
+
+Libraries:
+- pgx (database driver)
+- jwt-go (JWT tokens)
+- zerolog (structured logging)
+- godotenv (environment loading)
+- uuid (unique identifiers)
+- bcrypt (password hashing)
+
+Tools:
+- Docker
+- Docker Compose
+- golangci-lint
+- Make
+
+
+Quick Start Commands:
+====================
+
+# Local Development (3 terminals)
+make run-auth
+make run-user
+make run-gateway
+
+# Or Docker Compose
+docker-compose up
+
+# Build
+make build
+
+# Test
+make test
+
+# Lint
+make lint
+
+# Clean
+make clean
+
+
+API Endpoints:
+==============
+
+Auth Service:
+POST   /api/v1/auth/signup
+POST   /api/v1/auth/signin
+POST   /api/v1/auth/refresh
+
+User Service:
+GET    /api/v1/users
+GET    /api/v1/users/:id
+PUT    /api/v1/users/:id
+DELETE /api/v1/users/:id
+
+Gateway:
+GET    /health
+
+
+Default Ports:
+==============
+
+API Gateway: 8000
+Auth Service: 8001
+User Service: 8002
+PostgreSQL: 5432 (Docker)
+
+
+Next Steps:
+===========
+
+1. Follow SETUP.md to set up the project
+2. Review ARCHITECTURE.md for design patterns
+3. Run the example scripts to test APIs
+4. Add new services following the auth/user pattern
+5. Add tests for business logic
+6. Deploy to your environment
+7. Monitor and scale as needed
+
+
+For Questions:
+==============
+
+- Check README.md for overview
+- Check docs/SETUP.md for setup help
+- Check docs/DATABASE.md for database questions
+- Check docs/ARCHITECTURE.md for design questions
+- Check IMPLEMENTATION_GUIDE.md for complete details
